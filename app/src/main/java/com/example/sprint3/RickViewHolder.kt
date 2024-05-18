@@ -1,8 +1,9 @@
 package com.example.sprint3
 
-import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 
-class RickViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sprint3.databinding.ItemRickBinding
+
+class RickViewHolder(val binding: ItemRickBinding) : RecyclerView.ViewHolder(binding.root) {
 
 }
