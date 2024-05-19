@@ -1,8 +1,11 @@
-package com.example.sprint3
+package com.example.sprint3.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.sprint3.RetrofitHelper
+import com.example.sprint3.RickApiClient
+import com.example.sprint3.RickMortyModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

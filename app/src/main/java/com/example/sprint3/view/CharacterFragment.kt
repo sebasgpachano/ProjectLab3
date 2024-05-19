@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sprint3.CharacterViewModel
+import com.example.sprint3.viewmodel.CharacterViewModel
 import com.example.sprint3.RickAdapter
 import com.example.sprint3.RickMortyModel
 import com.example.sprint3.databinding.FragmentCharacterBinding
