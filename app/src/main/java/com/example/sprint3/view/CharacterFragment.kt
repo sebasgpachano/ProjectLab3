@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sprint3.RetrofitHelper
 import com.example.sprint3.RickAdapter
@@ -12,11 +13,11 @@ import com.example.sprint3.RickApiClient
 import com.example.sprint3.RickMortyModel
 import com.example.sprint3.databinding.FragmentCharacterBinding
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Callback
+import retrofit2.Response
 
 
-class CharacterFragment : Fragment() {
+class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {
 
     private var _binding: FragmentCharacterBinding? = null
     private val binding get() = _binding!!
@@ -36,7 +37,7 @@ class CharacterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rvRickMorty.layoutManager = LinearLayoutManager(context)
-        rickAdapter = RickAdapter(rickList)
+        rickAdapter = RickAdapter(rickList, this)
         binding.rvRickMorty.adapter = rickAdapter
 
         fetchData()
@@ -57,15 +58,20 @@ class CharacterFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<RickMortyModel>>, t: Throwable) {
-                //Error
+                // Handle failure
             }
         })
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
+    override fun onItemClick(item: Int) {
+        val action = CharacterFragmentDirections.actionCharacterFragmentToDetailsFragment(item)
+        findNavController().navigate(action)
+    }
 
 }
