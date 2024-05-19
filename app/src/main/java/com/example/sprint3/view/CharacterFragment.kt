@@ -5,20 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sprint3.RetrofitHelper
+import com.example.sprint3.CharacterViewModel
 import com.example.sprint3.RickAdapter
-import com.example.sprint3.RickApiClient
 import com.example.sprint3.RickMortyModel
 import com.example.sprint3.databinding.FragmentCharacterBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {
 
+    private val characterViewModel: CharacterViewModel by viewModels()
     private var _binding: FragmentCharacterBinding? = null
     private val binding get() = _binding!!
 
@@ -40,26 +39,15 @@ class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {
         rickAdapter = RickAdapter(rickList, this)
         binding.rvRickMorty.adapter = rickAdapter
 
-        fetchData()
+        observeViewModel()
+        characterViewModel.fetchData()
     }
 
-    private fun fetchData() {
-        val retrofit = RetrofitHelper.getRetrofit()
-        val rickApiClient = retrofit.create(RickApiClient::class.java)
-        val call = rickApiClient.getCharacters()
-
-        call.enqueue(object : Callback<List<RickMortyModel>> {
-            override fun onResponse(call: Call<List<RickMortyModel>>, response: Response<List<RickMortyModel>>) {
-                if (response.isSuccessful && response.body() != null) {
-                    rickList.clear()
-                    rickList.addAll(response.body()!!)
-                    rickAdapter.notifyDataSetChanged()
-                }
-            }
-
-            override fun onFailure(call: Call<List<RickMortyModel>>, t: Throwable) {
-                // Handle failure
-            }
+    private fun observeViewModel() {
+        characterViewModel.rickList.observe(viewLifecycleOwner, Observer { list ->
+            rickList.clear()
+            rickList.addAll(list)
+            rickAdapter.notifyDataSetChanged()
         })
     }
 
