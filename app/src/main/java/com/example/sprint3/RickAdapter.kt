@@ -4,18 +4,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sprint3.databinding.ItemRickBinding
-import com.squareup.picasso.Picasso
 
-class RickAdapter(val rickList: List<RickMortyModel>) : RecyclerView.Adapter<RickViewHolder>() {
+class RickAdapter(val rickList: List<RickMortyModel>, private val listener: OnItemClickListener) :
+    RecyclerView.Adapter<RickViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(item: Int)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RickViewHolder {
         val binding = ItemRickBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return RickViewHolder(binding)
+        return RickViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: RickViewHolder, position: Int) {
         val item = rickList[position]
-        Picasso.get().load(item.image).into(holder.binding.ivCharacter)
-        holder.binding.tvName.text = item.name
+        holder.bind(item)
     }
 
     override fun getItemCount(): Int {
