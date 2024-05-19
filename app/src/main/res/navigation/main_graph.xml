@@ -18,5 +18,10 @@
         android:id="@+id/detailsFragment"
         android:name="com.example.sprint3.view.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
 </navigation>
