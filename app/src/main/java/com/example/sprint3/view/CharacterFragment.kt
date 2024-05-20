@@ -49,6 +49,14 @@ class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {
             rickList.addAll(list)
             rickAdapter.notifyDataSetChanged()
         })
+
+        characterViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+            if (isLoading) {
+                binding.loadingBar.visibility = View.VISIBLE
+            } else {
+                binding.loadingBar.visibility = View.GONE
+            }
+        })
     }
 
 

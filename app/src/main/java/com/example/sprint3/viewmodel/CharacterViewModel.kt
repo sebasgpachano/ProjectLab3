@@ -14,7 +14,12 @@ class CharacterViewModel : ViewModel() {
 
     private val _rickList = MutableLiveData<List<RickMortyModel>>()
     val rickList: LiveData<List<RickMortyModel>> get() = _rickList
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     fun fetchData() {
+        _isLoading.value = true
         val retrofit = RetrofitHelper.getRetrofit()
         val rickApiClient = retrofit.create(RickApiClient::class.java)
         val call = rickApiClient.getCharacters()
@@ -27,10 +32,11 @@ class CharacterViewModel : ViewModel() {
                 if (response.isSuccessful && response.body() != null) {
                     _rickList.postValue(response.body())
                 }
+                _isLoading.value = false
             }
 
             override fun onFailure(call: Call<List<RickMortyModel>>, t: Throwable) {
-                //Error
+                _isLoading.value = false
             }
 
         })
