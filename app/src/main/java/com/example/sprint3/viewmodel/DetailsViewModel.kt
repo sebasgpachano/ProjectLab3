@@ -15,7 +15,11 @@ class DetailsViewModel : ViewModel() {
     private val _characterDetails = MutableLiveData<RickMortyModel>()
     val characterDetails: LiveData<RickMortyModel> get() = _characterDetails
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     fun fetchItemDetails(id: Int) {
+        _isLoading.value = true
         val retrofit = RetrofitHelper.getRetrofit()
         val rickApiClient = retrofit.create(RickApiClient::class.java)
         val call = rickApiClient.getCharacter("character/$id")
@@ -28,10 +32,11 @@ class DetailsViewModel : ViewModel() {
                 if (response.isSuccessful && response.body() != null) {
                     _characterDetails.postValue(response.body())
                 }
+                _isLoading.value = false
             }
 
             override fun onFailure(call: Call<RickMortyModel>, t: Throwable) {
-                //Error
+                _isLoading.value = false
             }
 
         })

@@ -45,6 +45,14 @@ class DetailsFragment : Fragment(), View.OnClickListener {
         detailsViewModel.characterDetails.observe(viewLifecycleOwner, Observer { character ->
             updateUI(character)
         })
+
+        detailsViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+            if (isLoading) {
+                binding.loadingBar.visibility = View.VISIBLE
+            } else {
+                binding.loadingBar.visibility = View.GONE
+            }
+        })
     }
 
 
