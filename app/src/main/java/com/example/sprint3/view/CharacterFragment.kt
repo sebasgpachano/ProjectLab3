@@ -48,11 +48,7 @@ class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {
         })
 
         characterViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
-            if (isLoading) {
-                binding.loadingBar.visibility = View.VISIBLE
-            } else {
-                binding.loadingBar.visibility = View.GONE
-            }
+            showLoading(isLoading)
         })
     }
 
@@ -71,6 +67,14 @@ class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {
     override fun onItemClick(item: Int) {
         val action = CharacterFragmentDirections.actionCharacterFragmentToDetailsFragment(item)
         findNavController().navigate(action)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.loadingBar.visibility = View.VISIBLE
+        } else {
+            binding.loadingBar.visibility = View.GONE
+        }
     }
 
 }
