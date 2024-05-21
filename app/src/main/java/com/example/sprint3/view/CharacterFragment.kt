@@ -35,10 +35,9 @@ class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvRickMorty.layoutManager = LinearLayoutManager(context)
-        rickAdapter = RickAdapter(rickList, this)
-        binding.rvRickMorty.adapter = rickAdapter
 
+
+        initRecyclerView()
         observeViewModel()
         characterViewModel.fetchData()
     }
@@ -57,6 +56,12 @@ class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {
                 binding.loadingBar.visibility = View.GONE
             }
         })
+    }
+
+    private fun initRecyclerView() {
+        binding.rvRickMorty.layoutManager = LinearLayoutManager(context)
+        rickAdapter = RickAdapter(rickList, this)
+        binding.rvRickMorty.adapter = rickAdapter
     }
 
 
