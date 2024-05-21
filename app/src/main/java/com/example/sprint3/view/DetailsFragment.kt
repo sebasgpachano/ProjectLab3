@@ -46,12 +46,8 @@ class DetailsFragment : Fragment(), View.OnClickListener {
             updateUI(character)
         })
 
-        detailsViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
-            if (isLoading) {
-                binding.loadingBar.visibility = View.VISIBLE
-            } else {
-                binding.loadingBar.visibility = View.GONE
-            }
+        detailsViewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            showLoading(it)
         })
     }
 
@@ -68,6 +64,14 @@ class DetailsFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.btBack -> findNavController().navigate(DetailsFragmentDirections.actionDetailsFragmentToCharacterFragment())
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.loadingBar.visibility = View.VISIBLE
+        } else {
+            binding.loadingBar.visibility = View.GONE
         }
     }
 }

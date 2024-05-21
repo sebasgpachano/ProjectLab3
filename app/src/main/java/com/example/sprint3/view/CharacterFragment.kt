@@ -47,8 +47,8 @@ class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {
             rickAdapter.notifyDataSetChanged()
         })
 
-        characterViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
-            showLoading(isLoading)
+        characterViewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            showLoading(it)
         })
     }
 
