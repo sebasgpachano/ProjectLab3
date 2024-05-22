@@ -38,7 +38,6 @@ class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {
 
         initRecyclerView()
         observeViewModel()
-        characterViewModel.fetchData()
     }
 
     private fun observeViewModel() {

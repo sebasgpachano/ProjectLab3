@@ -21,6 +21,10 @@ class CharacterViewModel : ViewModel() {
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
+    init {
+        fetchData()
+    }
+
     fun fetchData() {
         _isLoading.value = true
         viewModelScope.launch {
