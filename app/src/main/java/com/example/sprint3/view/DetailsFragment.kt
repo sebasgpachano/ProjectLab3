@@ -53,12 +53,13 @@ class DetailsFragment : Fragment(), View.OnClickListener {
 
 
     private fun updateUI(character: RickMortyModel?) {
-        Picasso.get().load(character?.image).into(binding.ivCharacter)
-        binding.tvName.text = "Nombre: ${character?.name}"
-        binding.tvStatus.text = "Status: ${character?.status}"
-        binding.tvSpecies.text = "Especie: ${character?.species}"
-        binding.tvGender.text = "Género: ${character?.gender}"
-
+        character?.let {
+            Picasso.get().load(it.image).into(binding.ivCharacter)
+            binding.tvName.text = "Nombre: ${it.name}"
+            binding.tvStatus.text = "Status: ${it.status}"
+            binding.tvSpecies.text = "Especie: ${it.species}"
+            binding.tvGender.text = "Género: ${it.gender}"
+        }
     }
 
     override fun onClick(view: View?) {
