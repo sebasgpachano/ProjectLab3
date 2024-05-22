@@ -18,6 +18,9 @@ class CharacterViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> get() = _error
+
     fun fetchData() {
         _isLoading.value = true
         viewModelScope.launch {
@@ -27,7 +30,7 @@ class CharacterViewModel : ViewModel() {
                 val call = rickApiClient.getCharacters()
                 _rickList.value = call.body()
             } catch (e: Exception) {
-                null
+                _error.value = (e.message ?: "Error desconocido")
             } finally {
                 _isLoading.value = false
             }
