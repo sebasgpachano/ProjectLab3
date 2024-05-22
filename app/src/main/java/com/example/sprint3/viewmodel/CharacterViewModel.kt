@@ -3,12 +3,12 @@ package com.example.sprint3.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.sprint3.retrofit.RetrofitHelper
 import com.example.sprint3.retrofit.RickApiClient
 import com.example.sprint3.RickMortyModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class CharacterViewModel : ViewModel() {
 
@@ -20,25 +20,17 @@ class CharacterViewModel : ViewModel() {
 
     fun fetchData() {
         _isLoading.value = true
-        val retrofit = RetrofitHelper.getRetrofit()
-        val rickApiClient = retrofit.create(RickApiClient::class.java)
-        val call = rickApiClient.getCharacters()
-
-        call.enqueue(object : Callback<List<RickMortyModel>> {
-            override fun onResponse(
-                call: Call<List<RickMortyModel>>,
-                response: Response<List<RickMortyModel>>
-            ) {
-                if (response.isSuccessful && response.body() != null) {
-                    _rickList.postValue(response.body())
-                }
+        viewModelScope.launch {
+            try {
+                val retrofit = RetrofitHelper.getRetrofit()
+                val rickApiClient = retrofit.create(RickApiClient::class.java)
+                val call = rickApiClient.getCharacters()
+                _rickList.value = call.body()
+            } catch (e: Exception) {
+                null
+            } finally {
                 _isLoading.value = false
             }
-
-            override fun onFailure(call: Call<List<RickMortyModel>>, t: Throwable) {
-                _isLoading.value = false
-            }
-
-        })
+        }
     }
 }
