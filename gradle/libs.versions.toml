@@ -14,6 +14,7 @@ constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.7.7"
 picasso = "2.8"
 retrofit = "2.9.0"
+safe = "2.7.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,4 +37,5 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "safe" }
 
