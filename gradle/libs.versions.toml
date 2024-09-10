@@ -1,5 +1,5 @@
 [versions]
-agp = "8.3.0"
+agp = "8.5.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -15,6 +15,10 @@ navigationFragmentKtx = "2.7.7"
 picasso = "2.8"
 retrofit = "2.9.0"
 safe = "2.7.1"
+
+#Hilt
+hilt = "2.48.1"
+pluginDaggerHilt = "2.48"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,8 +38,13 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
+#Hilt
+daggerHilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+daggerHiltCompiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "safe" }
+pluginDaggerHilt = { id = "com.google.dagger.hilt.android", version.ref = "pluginDaggerHilt" }
 

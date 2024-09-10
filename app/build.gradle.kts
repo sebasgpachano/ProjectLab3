@@ -1,7 +1,9 @@
 plugins {
+    kotlin("kapt")
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.safeargs)
+    alias(libs.plugins.pluginDaggerHilt)
 }
 
 android {
@@ -55,6 +57,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
+    implementation(libs.daggerHilt)
+
+    //Kapt
+    kapt(libs.daggerHiltCompiler)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -63,4 +70,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+kapt {
+    correctErrorTypes = true
 }
