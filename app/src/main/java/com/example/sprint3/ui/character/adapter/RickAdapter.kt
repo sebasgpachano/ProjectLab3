@@ -1,4 +1,4 @@
-package com.example.sprint3
+package com.example.sprint3.ui.character.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.example.sprint3
+package com.example.sprint3.ui.character.adapter
 
 
 import androidx.recyclerview.widget.RecyclerView
