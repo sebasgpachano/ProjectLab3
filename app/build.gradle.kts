@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.safeargs)
     alias(libs.plugins.pluginDaggerHilt)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
