@@ -1,6 +1,6 @@
 package com.example.sprint3.retrofit
 
-import com.example.sprint3.RickMortyModel
+import com.example.sprint3.data.RickMortyModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Url

@@ -2,6 +2,7 @@ package com.example.sprint3
 
 
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sprint3.data.RickMortyModel
 import com.example.sprint3.databinding.ItemRickBinding
 import com.squareup.picasso.Picasso
 

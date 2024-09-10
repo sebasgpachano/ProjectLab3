@@ -3,12 +3,13 @@ package com.example.sprint3
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sprint3.data.RickMortyModel
 import com.example.sprint3.databinding.ItemRickBinding
 
 class RickAdapter(val rickList: List<RickMortyModel>, private val listener: OnItemClickListener) :
     RecyclerView.Adapter<RickViewHolder>() {
 
-    interface OnItemClickListener {
+    fun interface OnItemClickListener {
         fun onItemClick(item: Int)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RickViewHolder {

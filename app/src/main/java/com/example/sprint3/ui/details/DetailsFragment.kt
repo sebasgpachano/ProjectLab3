@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.sprint3.R
-import com.example.sprint3.RickMortyModel
+import com.example.sprint3.data.RickMortyModel
 import com.example.sprint3.databinding.FragmentDetailsBinding
 import com.squareup.picasso.Picasso
 

@@ -1,4 +1,4 @@
-package com.example.sprint3
+package com.example.sprint3.data
 
 import com.google.gson.annotations.SerializedName
 
