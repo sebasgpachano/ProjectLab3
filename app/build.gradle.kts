@@ -52,6 +52,10 @@ dependencies {
     implementation(libs.picasso)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    //Okhttp
+    implementation(libs.okhttp)
+    //Interceptor
+    implementation(libs.interceptor)
 
     implementation(libs.kotlinx.coroutines.android)
 
