@@ -3,7 +3,7 @@ package com.example.sprint3.ui.character.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sprint3.data.RickMortyModel
+import com.example.sprint3.data.repository.remote.response.characters.RickMortyModel
 import com.example.sprint3.databinding.ItemRickBinding
 
 class RickAdapter(val rickList: List<RickMortyModel>, private val listener: OnItemClickListener) :

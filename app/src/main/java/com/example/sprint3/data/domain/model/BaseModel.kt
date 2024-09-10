@@ -1,4 +1,4 @@
-package com.example.sprint3.data.model
+package com.example.sprint3.data.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

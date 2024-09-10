@@ -1,18 +1,18 @@
 package com.example.sprint3.ui.character
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sprint3.ui.character.adapter.RickAdapter
-import com.example.sprint3.data.RickMortyModel
+import com.example.sprint3.data.repository.remote.response.characters.RickMortyModel
 import com.example.sprint3.databinding.FragmentCharacterBinding
+import com.example.sprint3.ui.character.adapter.RickAdapter
 
 
 class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {

@@ -2,7 +2,7 @@ package com.example.sprint3.ui.base
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.sprint3.data.model.ErrorModel
+import com.example.sprint3.data.domain.model.ErrorModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
