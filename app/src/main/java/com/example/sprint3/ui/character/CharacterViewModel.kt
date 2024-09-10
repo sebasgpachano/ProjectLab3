@@ -1,4 +1,4 @@
-package com.example.sprint3.viewmodel
+package com.example.sprint3.ui.character
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,10 +10,10 @@ import com.example.sprint3.RickMortyModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class DetailsViewModel : ViewModel() {
+class CharacterViewModel : ViewModel() {
 
-    private val _characterDetails = MutableLiveData<RickMortyModel>()
-    val characterDetails: LiveData<RickMortyModel> get() = _characterDetails
+    private val _rickList = MutableLiveData<List<RickMortyModel>>()
+    val rickList: LiveData<List<RickMortyModel>> get() = _rickList
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -21,14 +21,18 @@ class DetailsViewModel : ViewModel() {
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
-    fun fetchItemDetails(id: Int) {
+    init {
+        fetchData()
+    }
+
+    fun fetchData() {
         _isLoading.value = true
         viewModelScope.launch {
             try {
                 val retrofit = RetrofitHelper.getRetrofit()
                 val rickApiClient = retrofit.create(RickApiClient::class.java)
-                val call = rickApiClient.getCharacter("character/$id")
-                _characterDetails.value = call.body()
+                val call = rickApiClient.getCharacters()
+                _rickList.value = call.body()
             } catch (e: Exception) {
                 _error.value = (e.message ?: "Error desconocido")
             } finally {

@@ -1,4 +1,4 @@
-package com.example.sprint3.view
+package com.example.sprint3.ui.character
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sprint3.viewmodel.CharacterViewModel
 import com.example.sprint3.RickAdapter
 import com.example.sprint3.RickMortyModel
 import com.example.sprint3.databinding.FragmentCharacterBinding

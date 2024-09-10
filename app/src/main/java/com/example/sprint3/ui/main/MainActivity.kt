@@ -1,4 +1,4 @@
-package com.example.sprint3.view
+package com.example.sprint3.ui.main
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
