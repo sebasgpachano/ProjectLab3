@@ -12,16 +12,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 import javax.inject.Singleton
 import javax.net.ssl.HostnameVerifier
 
 @Singleton
-class RetrofitClient {
+class RetrofitClient @Inject constructor() {
 
     companion object {
         const val HEADER_KEY_TOKEN = "Authorization"
-        const val URL = "https://rickandmortyapi.com/api/"
-        private const val SHA256 = ""
+        const val URL = "rickandmortyapi.com"
+        private const val SHA256 = "sha256/dAFbai5eSQy4IsN10BR9A33RoO4e8uxDVnRXw0mA9Dw="
     }
 
     val retrofit: Retrofit

@@ -46,7 +46,7 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding>(),
 
     override fun configureToolbarAndConfigScreenSections() {
         fragmentLayoutWithToolbar()
-        showToolbar(title = "Personajes", showBack = true)
+        showToolbar(title = "Personajes", showBack = false)
     }
 
     override fun observeViewModel() {

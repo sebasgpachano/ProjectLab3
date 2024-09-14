@@ -6,4 +6,7 @@
     <string name="character">character</string>
     <string name="loading_text">Cargando...</string>
     <string name="toolbar_back">toolbar_back</string>
+
+    <string name="error_connection">Lo sentimos, estamos presentando problemas de conexión</string>
+    <string name="error_connection_message">Vuelve a intentarlo más tarde.</string>
 </resources>
