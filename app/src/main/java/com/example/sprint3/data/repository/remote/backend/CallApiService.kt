@@ -12,8 +12,8 @@ class CallApiService @Inject constructor(private val apiService: ApiService) : B
         return apiCall { apiService.getCharacters() }
     }
 
-    suspend fun callGetCharacter(url: String): BaseResponse<GetCharactersResponse> {
-        return apiCall { apiService.getCharacter(url) }
+    suspend fun callGetCharacter(id: Int): BaseResponse<GetCharactersResponse> {
+        return apiCall { apiService.getCharacter(id) }
     }
 
 }
