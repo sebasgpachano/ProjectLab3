@@ -16,14 +16,14 @@ import javax.inject.Inject
 class CharacterViewModel @Inject constructor(private val getCharacterUseCase: GetCharacterUseCase) :
     BaseViewModel() {
 
-    private val rickListMutableStateFlow = MutableStateFlow<List<CharacterModel>>(emptyList())
+    private val rickListMutableStateFlow = MutableStateFlow<List<CharacterModel>>(arrayListOf())
     val rickStateFlow: StateFlow<List<CharacterModel>> = rickListMutableStateFlow
 
     init {
-        fetchData()
+        getCharacterList()
     }
 
-    private fun fetchData() {
+    fun getCharacterList() {
         viewModelScope.launch(Dispatchers.IO) {
             loadingMutableSharedFlow.emit(true)
             getCharacterUseCase().collect {

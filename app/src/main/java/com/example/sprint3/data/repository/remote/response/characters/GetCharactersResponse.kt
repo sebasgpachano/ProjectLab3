@@ -2,7 +2,7 @@ package com.example.sprint3.data.repository.remote.response.characters
 
 import com.google.gson.annotations.SerializedName
 
-data class RickMortyModel(
+data class GetCharactersResponse(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
     @SerializedName("image") val image: String,

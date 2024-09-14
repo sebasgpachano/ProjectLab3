@@ -4,82 +4,74 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sprint3.data.repository.remote.response.characters.RickMortyModel
 import com.example.sprint3.databinding.FragmentCharacterBinding
+import com.example.sprint3.ui.base.BaseFragment
 import com.example.sprint3.ui.character.adapter.RickAdapter
+import com.example.sprint3.ui.extensions.toastLong
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-
-class CharacterFragment : Fragment(), RickAdapter.OnItemClickListener {
+@AndroidEntryPoint
+class CharacterFragment : BaseFragment<FragmentCharacterBinding>(),
+    RickAdapter.OnItemClickListener {
 
     private val characterViewModel: CharacterViewModel by viewModels()
-    private var _binding: FragmentCharacterBinding? = null
-    private val binding get() = _binding!!
-
     private lateinit var rickAdapter: RickAdapter
-    private val rickList = mutableListOf<RickMortyModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    override fun inflateBinding() {
+        binding = FragmentCharacterBinding.inflate(layoutInflater)
+    }
+
+    override fun createViewAfterInflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentCharacterBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    ) {
         initRecyclerView()
-        observeViewModel()
-    }
-
-    private fun observeViewModel() {
-        characterViewModel.rickList.observe(viewLifecycleOwner, Observer { list ->
-            rickList.clear()
-            rickList.addAll(list)
-            rickAdapter.notifyDataSetChanged()
-        })
-
-        characterViewModel.isLoading.observe(viewLifecycleOwner, Observer {
-            showLoading(it)
-        })
-
-        characterViewModel.error.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
-            }
-        })
     }
 
     private fun initRecyclerView() {
-        binding.rvRickMorty.layoutManager = LinearLayoutManager(context)
-        rickAdapter = RickAdapter(rickList, this)
-        binding.rvRickMorty.adapter = rickAdapter
+        binding?.rvRickMorty?.layoutManager = LinearLayoutManager(context)
+        rickAdapter = RickAdapter(arrayListOf(), this)
+        binding?.rvRickMorty?.adapter = rickAdapter
     }
 
+    override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
+        characterViewModel.getCharacterList()
+    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun configureToolbarAndConfigScreenSections() {
+        fragmentLayoutWithToolbar()
+        showToolbar(title = "Personajes", showBack = true)
+    }
+
+    override fun observeViewModel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            characterViewModel.loadingFlow.collect {
+                showLoading(it)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            characterViewModel.rickStateFlow.collect { dataSet ->
+                rickAdapter.refreshData(dataSet)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            characterViewModel.errorFlow.collect { error ->
+                requireContext().toastLong(error.message)
+            }
+        }
     }
 
     override fun onItemClick(item: Int) {
         val action = CharacterFragmentDirections.actionCharacterFragmentToDetailsFragment(item)
         findNavController().navigate(action)
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.loadingBar.visibility = View.VISIBLE
-        } else {
-            binding.loadingBar.visibility = View.GONE
-        }
     }
 
 }
